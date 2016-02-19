@@ -4,6 +4,7 @@ import (
 	"algo"
 	"fmt"
 	"strcon"
+	"time"
 )
 
 func DefineMap() {
@@ -48,6 +49,45 @@ func DefineArray() {
 	fmt.Println("define array:", x1)
 }
 
+func ShowPersonInfo() {
+	p := strcon.Person{
+		"Shiju",
+		"Varghese",
+		time.Date(1979, time.February, 17, 0, 0, 0, 0, time.UTC),
+		"shiju@email.com",
+		"Kochi",
+	}
+	p.PrintName()
+	p.PrintDetails()
+}
+
+func ShowAdminInfo() {
+	alex := strcon.Admin{
+		strcon.Person{
+			"Alex",
+			"John",
+			time.Date(1970, time.January, 10,
+				0, 0, 0, 0, time.UTC),
+			"alex@email.com",
+			"New York"},
+		[]string{"Manage Team", "Manage Tasks"},
+	}
+	shiju := strcon.Member{
+		strcon.Person{
+			"Shiju",
+			"Varghese",
+			time.Date(1979, time.February, 17, 0, 0, 0, 0, time.UTC),
+			"shiju@email.com",
+			"Kochi"},
+		[]string{"Go", "Docker", "Kubernetes"},
+	}
+	//call methods for alex
+	alex.PrintName()
+	alex.PrintDetails()
+	//call methods for shiju
+	shiju.PrintName()
+	shiju.PrintDetails()
+}
 func Init() {
 	if algo.Fibonacci(6) == 8 {
 		fmt.Println("fibonacci(6)== 8 ")
@@ -58,6 +98,8 @@ func Init() {
 	DefineArray()
 	DefineSlice()
 	DefineMap()
+	ShowPersonInfo()
+	ShowAdminInfo()
 }
 
 func main() {
