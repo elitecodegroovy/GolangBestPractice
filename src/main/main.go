@@ -3,6 +3,7 @@ package main
 import (
 	"algo"
 	"fmt"
+	"net/http"
 	"strcon"
 	"time"
 )
@@ -102,6 +103,40 @@ func Init() {
 	ShowAdminInfo()
 }
 
+type messageHandler struct {
+	message string
+}
+
+func (m *messageHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, m.message)
+}
+
+func ChartHandler(message string) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, message)
+	})
+}
+
+func StartupServer() {
+	mux := http.NewServeMux()
+	mh1 := &messageHandler{"Welcome to Go Web Development"}
+	mux.Handle("/welcome", mh1)
+
+	mh2 := &messageHandler{"net/http web service component"}
+	mux.Handle("/message", mh2)
+
+	tag := "North Korea hurls insults at South Korea"
+	mux.Handle("/chart-1", ChartHandler(tag))
+
+	fs := http.FileServer(http.Dir("public"))
+	mux.Handle("/", fs)
+
+	http.ListenAndServe(":8080", mux)
+}
+
 func main() {
-	Init()
+	//	Init()
+	//	StartupServer()
+	//	strcon.StartSimpleServer()
+	strcon.StartMuxServer()
 }
