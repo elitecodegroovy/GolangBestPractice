@@ -120,7 +120,7 @@ func ChartHandler(message string) http.Handler {
 }
 
 func ReadFile() {
-	file, err := os.Open("public/file.txt")
+	file, err := os.Open("public/baidu.html")
 
 	if err != nil {
 		fmt.Println(err)
