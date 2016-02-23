@@ -3,7 +3,9 @@ package main
 import (
 	"algo"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 	"strcon"
 	"time"
 )
@@ -117,6 +119,35 @@ func ChartHandler(message string) http.Handler {
 	})
 }
 
+func ReadFile() {
+	file, err := os.Open("public/file.txt")
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	defer file.Close()
+
+	// create a buffer to keep chunks that are read
+
+	buffer := make([]byte, 1024)
+	for {
+		// read a chunk
+		n, err := file.Read(buffer)
+		if err != nil && err != io.EOF {
+			panic(err)
+		}
+		if n == 0 {
+			break
+		}
+
+		// out the file content
+		fmt.Println(string(buffer[:n]))
+
+	}
+}
+
 func StartupServer() {
 	mux := http.NewServeMux()
 	mh1 := &messageHandler{"Welcome to Go Web Development"}
@@ -135,6 +166,7 @@ func StartupServer() {
 }
 
 func main() {
+	ReadFile()
 	//	Init()
 	//	StartupServer()
 	//	strcon.StartSimpleServer()

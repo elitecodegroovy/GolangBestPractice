@@ -1,0 +1,11 @@
+InfoQ recently became aware that an attacker gained access to our email list management system and the email addresses of some of our readers were illegally copied. We also know that some readers have subsequently received spam to their email accounts as a result of this breach.
+
+Hashed user passwords and other account information were not hosted in the compromised system - only email addresses leaked - so there is no reason to update your password or take any other action at this stage.
+
+We want to publicly restate that InfoQ will never deliberately share or sell an email address without your knowledge and consent. 
+
+In addition to notifying users we have made some immediate changes to our processes and procedures and are continuing to carry out a more detailed security audit to reduce the likelihood of something like this happening again.
+
+InfoQ values the trust of our readers. We are committed to your privacy and security, and we deeply regret any inconvenience this may cause you.  We have attempted to individually reply to each of you who contacted us to alert us to the problem, but would also like to publicly thank you for doing so.
+
+If you would like additional information, please contact us via feedback@infoq.com or via a comment to this thread.
