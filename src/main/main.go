@@ -120,7 +120,7 @@ func ChartHandler(message string) http.Handler {
 }
 
 func ReadFile() {
-	file, err := os.Open("public/baidu.html")
+	file, err := os.Open("h5/index.html")
 
 	if err != nil {
 		fmt.Println(err)
@@ -166,9 +166,11 @@ func StartupServer() {
 }
 
 func main() {
+	//read file
 	ReadFile()
 	//	Init()
 	//	StartupServer()
 	//	strcon.StartSimpleServer()
-	strcon.StartMuxServer()
+	//	strcon.StartMuxServer()
+	StartHtmlTemplateServer()
 }
