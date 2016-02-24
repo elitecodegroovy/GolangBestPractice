@@ -8,6 +8,7 @@ import (
 	"os"
 	"strcon"
 	"time"
+	"web"
 )
 
 func DefineMap() {
@@ -172,5 +173,8 @@ func main() {
 	//	StartupServer()
 	//	strcon.StartSimpleServer()
 	//	strcon.StartMuxServer()
-	StartHtmlTemplateServer()
+	//	StartHtmlTemplateServer()
+	//	StartLogMiddlewareServer()
+	//	StartGorillaHandlersServer()
+	web.StartNegroniServer()
 }
