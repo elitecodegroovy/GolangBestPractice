@@ -11,5 +11,13 @@ go get github.com/justinas/alice
 
 ### configure middleware functions
 go get github.com/codegangsta/negroni
+
+##oauth 2
+go get github.com/markbates/goth
+
+go get github.com/gorilla/sessions
+
+go get github.com/mrjones/oauth
+
 ```
 

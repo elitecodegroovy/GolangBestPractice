@@ -176,5 +176,6 @@ func main() {
 	//	StartHtmlTemplateServer()
 	//	StartLogMiddlewareServer()
 	//	StartGorillaHandlersServer()
-	web.StartNegroniServer()
+	//	web.StartNegroniServer()
+	StartGothServer()
 }
