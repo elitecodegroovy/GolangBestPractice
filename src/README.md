@@ -1,6 +1,5 @@
 
-
-#third-part package
+#third-part package configuration
 ```
 go get github.com/gorilla/mux
 
