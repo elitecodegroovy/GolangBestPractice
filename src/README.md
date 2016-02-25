@@ -17,7 +17,16 @@ go get github.com/markbates/goth
 
 go get github.com/gorilla/sessions
 
+#GFW forbidden the url link.
+go get golang.org/x/oauth2
+go get goland.org/x/net
 go get github.com/mrjones/oauth
 
+##signing algorithms of RSA256 and HMAC SHA256
+go get github.com/dgrijalva/jwt-go
+
+
+##redis client library -- radix
+go get github.com/mediocregopher/radix.v2
 ```
 
