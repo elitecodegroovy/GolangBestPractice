@@ -92,8 +92,8 @@ func SendEmail() {
 
 //It works.
 func SendShortEmail(to string, message string, subject string) {
-	// Set up authentication information.
-	auth := smtp.PlainAuth("", "soulmanjohn@163.com", "elite789?S", "smtp.163.com")
+	//TODO ....(password), Set up authentication information.
+	auth := smtp.PlainAuth("", "soulmanjohn@163.com", "password...TODO", "smtp.163.com")
 
 	// Connect to the server, authenticate, set the sender and recipient,
 	// and send the email all in one step.

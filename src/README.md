@@ -28,5 +28,11 @@ go get github.com/dgrijalva/jwt-go
 
 ##redis client library -- radix
 go get github.com/mediocregopher/radix.v2
+
+
+##build packages reproducibly by fixing their dependencies
+#godep save -r
+go get github.com/tools/godep
+
 ```
 

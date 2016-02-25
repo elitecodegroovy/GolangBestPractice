@@ -170,7 +170,7 @@ func main() {
 	//read file
 	ReadFile()
 	web.StartTLSHttp()
-	web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
+	//web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
 	//	Init()
 	//	StartupServer()
 	//	strcon.StartSimpleServer()
