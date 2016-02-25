@@ -13,6 +13,7 @@ go get github.com/justinas/alice
 go get github.com/codegangsta/negroni
 
 ##oauth 2
+go get github.com/gorilla/pat
 go get github.com/markbates/goth
 
 go get github.com/gorilla/sessions

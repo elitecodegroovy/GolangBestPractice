@@ -25,6 +25,22 @@ type Configuration struct {
 
 var config Configuration
 
+var indexTemplate = `
+<p><a href="/auth/twitter">Log in with Twitter</a></p>
+<p><a href="/auth/facebook">Log in with Facebook</a></p>
+`
+
+var userTemplate = `
+<p>Name: {{.Name}}</p>
+<p>Email: {{.Email}}</p>
+<p>NickName: {{.NickName}}</p>
+<p>Location: {{.Location}}</p>
+<p>AvatarURL: {{.AvatarURL}} <img src="{{.AvatarURL}}"></p>
+<p>Description: {{.Description}}</p>
+<p>UserID: {{.UserID}}</p>
+<p>AccessToken: {{.AccessToken}}</p>
+`
+
 //Read configuration values from config.json
 func init() {
 	file, _ := os.Open("config.json")
@@ -44,7 +60,7 @@ func callbackAuthHandler(res http.ResponseWriter, req *http.Request) {
 	t, _ := template.New("userinfo").Parse(userTemplate)
 	t.Execute(res, user)
 }
-func indexHandler(res http.ResponseWriter, req *http.Request) {
+func indexHandlerGoth(res http.ResponseWriter, req *http.Request) {
 	t, _ := template.New("index").Parse(indexTemplate)
 	t.Execute(res, nil)
 }
@@ -59,7 +75,7 @@ func StartGothServer() {
 	r := pat.New()
 	r.Get("/auth/{provider}/callback", callbackAuthHandler)
 	r.Get("/auth/{provider}", gothic.BeginAuthHandler)
-	r.Get("/", indexHandler)
+	r.Get("/", indexHandlerGoth)
 	server := &http.Server{
 		Addr:    ":8080",
 		Handler: r,
@@ -67,19 +83,3 @@ func StartGothServer() {
 	log.Println("Listening...")
 	server.ListenAndServe()
 }
-
-var indexTemplate = `
-<p><a href="/auth/twitter">Log in with Twitter</a></p>
-<p><a href="/auth/facebook">Log in with Facebook</a></p>
-`
-
-var userTemplate = `
-<p>Name: {{.Name}}</p>
-<p>Email: {{.Email}}</p>
-<p>NickName: {{.NickName}}</p>
-<p>Location: {{.Location}}</p>
-<p>AvatarURL: {{.AvatarURL}} <img src="{{.AvatarURL}}"></p>
-<p>Description: {{.Description}}</p>
-<p>UserID: {{.UserID}}</p>
-<p>AccessToken: {{.AccessToken}}</p>
-`

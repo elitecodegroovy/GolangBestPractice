@@ -8,7 +8,7 @@ import (
 	"os"
 	"strcon"
 	"time"
-	"web"
+	//	"web"
 )
 
 func DefineMap() {
