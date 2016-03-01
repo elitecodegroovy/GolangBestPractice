@@ -34,5 +34,9 @@ go get github.com/mediocregopher/radix.v2
 #godep save -r
 go get github.com/tools/godep
 
+
+##beego
+go get github.com/beego/bee
+
 ```
 
