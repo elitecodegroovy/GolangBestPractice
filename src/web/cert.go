@@ -20,7 +20,7 @@ Options:
   -h  Hostname of TLS server to install the private cert/key
 `
 
-func main() {
+func MakeCer() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, usage)
 	}
