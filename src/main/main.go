@@ -168,9 +168,9 @@ func StartupServer() {
 
 func main() {
 	//read file
-	//	ReadFile()
-	//	web.StartTLSHttp()
-	web.GetEtcdInfo()
+	ReadFile()
+	web.StartTLSHttp()
+	//	web.GetEtcdInfo()
 	//web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
 	//	Init()
 	//	StartupServer()
