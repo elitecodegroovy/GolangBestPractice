@@ -8,7 +8,7 @@ import (
 	"os"
 	"strcon"
 	"time"
-	"util"
+	//	"util"
 	"web"
 )
 
@@ -167,15 +167,15 @@ func StartupServer() {
 	http.ListenAndServe(":8080", mux)
 }
 
-func StartSimpleWeb() {
-	http.ListenAndServe(":8080", util.SetUserRoutes())
-}
+//func StartSimpleWeb() {
+//	http.ListenAndServe(":8080", util.SetUserRoutes())
+//}
 
 func main() {
 	//read file
 	//	ReadFile()
 	web.StartTLSHttp()
-	StartSimpleWeb()
+	//	StartSimpleWeb()
 	//	web.GetEtcdInfo()
 	//web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
 	//	Init()
