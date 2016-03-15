@@ -9,42 +9,53 @@ import (
 	"strcon"
 	"time"
 	//	"util"
-	"web"
+	//	"web"
 )
 
+//There are several ways to create and initialize maps
 func DefineMap() {
-	dict := make(map[string]string)
-	dict["go"] = "Golang"
-	dict["cs"] = "CSharp"
-	dict["rb"] = "Ruby"
-	dict["py"] = "Python"
-	dict["js"] = "JavaScript"
-	fmt.Print("\n")
-	for k, v := range dict {
-		fmt.Printf("Key: %s Value: %s\t", k, v)
+	refl := make(map[int]int)
+	refl[1] = 10
+	refl[2] = 20
+	for k, r := range refl {
+		fmt.Println("reflection k:", k, ", v:", r)
+		if k == 1 {
+			fmt.Println("get key :", k)
+		}
 	}
-	fmt.Print("\n")
-	if lan, ok := dict["go"]; ok {
-		fmt.Println(lan, ok)
+
+	if v, ok := refl[2]; ok {
+		fmt.Println("get key 2 :", ok, ", value:", v)
 	}
 }
+
+//Funfamental Slice struct operations
 func DefineSlice() {
-	//x := make([]int, 5,10)
-	//A Slice Initializes for a Specific Length Without Providing Elements
-	//x2 := []int{4: 0}
+	//Specifying Length and Capacity in a Slice with the make Function
+	//If the slice capacity is not specified, the capacity is the same as the length.
+	p := make([]int, 3, 5)
+	p[1] = 10
+	p[2] = 20
+	fmt.Println(p)
+
+	p1 := []string{"a", "b", "c", "d", "e"}
+	fmt.Println(p1)
+
+	p2 := []string{"a", "b", 4: "eeee"}
+	fmt.Println(p2)
+
 	//append and copy
-	x := []int{10, 20, 30}
-	y := append(x, 40, 50)
-	fmt.Println(x, y)
+	p3 := append(p2, "f", "g")
+	fmt.Println(p2, p3)
 
-	x1 := []int{1, 2, 3, 4, 5}
-	y1 := make([]int, 6)
-	copy(y1, x1)
-	fmt.Println(x1, y1)
+	p4 := []int{1, 2, 30, 4, 5}
+	p5 := make([]int, 6)
+	copy(p5, p4)
+	fmt.Println(p4, p5, len(p4), cap(p5))
 
-	x2 := []int{10, 20, 30}
-	for k, v := range x2 {
-		fmt.Printf("Index: %d Value: %d\t ", k, v)
+	//iterator over Slice type
+	for k, v := range p5 {
+		fmt.Println("index ", k, " value:", v)
 	}
 }
 
@@ -146,7 +157,6 @@ func ReadFile() {
 
 		// out the file content
 		fmt.Println(string(buffer[:n]))
-
 	}
 }
 
@@ -171,10 +181,36 @@ func StartupServer() {
 //	http.ListenAndServe(":8080", util.SetUserRoutes())
 //}
 
+func DoCollection() {
+	input, expected := "Hello, World", "dlroW ,olleH"
+	fmt.Printf("%s was reversed %s\n", input, expected)
+
+	//array demo
+	var x1 [5]int
+	x1[0] = 3
+	x1[2] = 1
+	fmt.Println(x1)
+	//init array
+	x2 := [5]int{1, 2, 3, 4, 5}
+	fmt.Println(x2)
+	//specified element
+	x3 := [3]int{9, 2: 4}
+	fmt.Println(x3)
+
+	x4 := [2]string{"Go", "Golang"}
+	fmt.Println(x4)
+	x5 := [3]string{"Beego", 1: ",", 2: "Gin"}
+	fmt.Println(x5)
+
+	//Slice
+	DefineSlice()
+	DefineMap()
+}
 func main() {
 	//read file
 	//	ReadFile()
-	web.StartTLSHttp()
+	//	web.StartTLSHttp()
+	DoCollection()
 	//	StartSimpleWeb()
 	//	web.GetEtcdInfo()
 	//web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
