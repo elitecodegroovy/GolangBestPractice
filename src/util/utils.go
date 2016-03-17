@@ -27,11 +27,11 @@ func Reverse(s string) string {
 }
 
 //Defer is not the same as deferred (or futures/promises) in other languages.
-//func StartDemo() {
-//	aValue := new(int)
+func StartDemo() {
+	aValue := new(int)
 
-//	defer fmt.Println(*aValue)
-//	for i := 0; i < 100; i++ {
-//		*aValue++
-//	}
-//}
+	defer fmt.Println(*aValue)
+	for i := 0; i < 100; i++ {
+		*aValue++
+	}
+}
