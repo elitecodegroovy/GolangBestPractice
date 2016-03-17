@@ -2,7 +2,7 @@ package main
 
 import (
 	"algo"
-	//	"conc"
+	"conc"
 	"fmt"
 	"io"
 	"net/http"
@@ -208,17 +208,19 @@ func DoCollection() {
 	DefineMap()
 }
 
-//func StartConcurrecy() {
-//	//	conc.StartSimple()
-//	conc.StartSyncSimple()
-//}
+func StartConcurrecy() {
+	//	conc.StartSimple()
+	//	conc.StartSyncSimple()
+	conc.StartReadText()
+	conc.StartChan()
+}
 
 func main() {
 	//read file
 	//	ReadFile()
 	//	web.StartTLSHttp()
 	//	DoCollection()
-	//	StartConcurrecy()
+	StartConcurrecy()
 	//	StartSimpleWeb()
 	//	web.GetEtcdInfo()
 	//web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
