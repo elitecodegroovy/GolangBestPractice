@@ -7,6 +7,8 @@ import (
 	"sync"
 )
 
+//A buffered channel is synchronous.
+//Go’s channel system is based on Communicating Sequential Processes (CSP),
 var initialString string
 var finalString string
 var stringLength int
@@ -25,10 +27,10 @@ func capitalize(letterChannel chan string, currentLetter string,
 }
 
 func StartChan() {
-	runtime.GOMAXPROCS(3)
+	runtime.GOMAXPROCS(2)
 	var wg sync.WaitGroup
 
-	initialString = "Four score and seven years"
+	initialString = "When we first brainstormed Swarm Week"
 	initialBytes := []byte(initialString)
 	var letterChannel chan string = make(chan string)
 	stringLength = len(initialBytes)

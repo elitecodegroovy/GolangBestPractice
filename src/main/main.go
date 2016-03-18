@@ -2,6 +2,7 @@ package main
 
 import (
 	"algo"
+	"channel"
 	"conc"
 	"fmt"
 	"io"
@@ -213,9 +214,14 @@ func StartConcurrecy() {
 	//	conc.StartSyncSimple()
 	conc.StartReadText()
 	conc.StartChan()
+
+	//start channel
+	channel.StartChannel()
 }
 
 func main() {
+	start := time.Now() // get current time
+
 	//read file
 	//	ReadFile()
 	//	web.StartTLSHttp()
@@ -236,4 +242,7 @@ func main() {
 	//	StartGothServer()
 
 	util.StartDemo()
+	//	util.StartCac()
+	elapsed := time.Since(start)
+	fmt.Printf("time elapsed: %s\n", elapsed)
 }
