@@ -45,6 +45,7 @@ func addToScrapedText(textChannel chan string, processChannel chan bool) {
 			}
 		case tC := <-textChannel:
 			fullText += tC
+			fmt.Println(tC)
 		}
 	}
 }
@@ -98,6 +99,9 @@ func StartSpider() {
 		select {
 		case sC := <-statusChannel:
 			fmt.Println("Message on StatusChannel", sC)
+			if sC == 1 {
+				break
+			}
 		}
 	}
 }
