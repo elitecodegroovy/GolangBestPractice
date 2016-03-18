@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"spider"
 	"strcon"
 	"time"
 	"util"
@@ -214,9 +215,11 @@ func StartConcurrecy() {
 	//	conc.StartSyncSimple()
 	conc.StartReadText()
 	conc.StartChan()
+	conc.StartClosure()
 
 	//start channel
 	channel.StartChannel()
+	spider.StartSpider()
 }
 
 func main() {
