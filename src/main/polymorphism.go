@@ -22,4 +22,7 @@ func StartPolymorphism() {
 
 	text := new(strCase)
 	fmt.Print("strCase Add: ", text.Add("Add A", "Add B"), "\n")
+
+	substract := func(a, b int) int { return a - b }
+	fmt.Print("--substraction function literals: ", substract(10, 2), "\n")
 }
