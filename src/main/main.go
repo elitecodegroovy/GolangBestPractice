@@ -8,10 +8,10 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"spider"
+	//	"spider"
 	"strcon"
 	"time"
-	"util"
+	//	"util"
 	//	"web"
 )
 
@@ -215,11 +215,11 @@ func StartConcurrecy() {
 	//	conc.StartSyncSimple()
 	conc.StartReadText()
 	conc.StartChan()
-	conc.StartClosure()
+	//	conc.StartClosure()
 
 	//start channel
 	channel.StartChannel()
-	spider.StartSpider()
+	//	spider.StartSpider()
 }
 
 func main() {
@@ -244,8 +244,9 @@ func main() {
 	//TODO ...fixed the invalid arguments "invalid argument"
 	//	StartGothServer()
 
-	util.StartDemo()
+	//	util.StartDemo()
 	//	util.StartCac()
+	StartPolymorphism()
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
