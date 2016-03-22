@@ -12,6 +12,7 @@ import (
 	"basic"
 	"strcon"
 	"time"
+	//	"tiny"
 	//	"util"
 	//	"web"
 )
@@ -225,6 +226,13 @@ func StartConcurrecy() {
 
 func StartBasic() {
 	basic.StartComposeGo()
+	//	tiny.StartTiny()
+	//	SyncOp()
+}
+
+func SyncOp() {
+	//	basic.DetectBalance()
+	basic.StartMuxBalance()
 }
 func main() {
 	start := time.Now() // get current time
@@ -252,6 +260,7 @@ func main() {
 	//	util.StartCac()
 	StartPolymorphism()
 	StartBasic()
+
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
