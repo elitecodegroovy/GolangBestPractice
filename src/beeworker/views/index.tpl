@@ -82,10 +82,12 @@
   </header>
   <footer>
     <div class="author">
-      Official website:
+      github website:
       <a href="http://{{.Website}}">{{.Website}}</a> /
       Contact me:
       <a class="email" href="mailto:{{.Email}}">{{.Email}}</a>
+	  <br>
+	   message: {{.Info}}
     </div>
   </footer>
   <div class="backdrop"></div>
