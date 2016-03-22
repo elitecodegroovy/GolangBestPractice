@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	//	"spider"
+	"basic"
 	"strcon"
 	"time"
 	//	"util"
@@ -222,6 +223,9 @@ func StartConcurrecy() {
 	//	spider.StartSpider()
 }
 
+func StartBasic() {
+	basic.StartComposeGo()
+}
 func main() {
 	start := time.Now() // get current time
 
@@ -247,6 +251,7 @@ func main() {
 	//	util.StartDemo()
 	//	util.StartCac()
 	StartPolymorphism()
+	StartBasic()
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
