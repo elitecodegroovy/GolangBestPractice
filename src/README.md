@@ -38,5 +38,9 @@ go get github.com/coreos/etcd/client
 ##beego
 go get github.com/beego/bee
 
+
+go get github.com/beego/i18n
+go get github.com/gorilla/websocket
+
 ```
 
