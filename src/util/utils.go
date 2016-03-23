@@ -1,8 +1,12 @@
 package util
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
+	"io"
+	"os"
+	"strings"
 	"unicode"
 )
 
@@ -35,4 +39,40 @@ func StartDemo() {
 		*aValue++
 	}
 	FormatTime()
+}
+
+func ReadFile(filePath string) {
+	file, err := os.Open(filePath)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	defer file.Close()
+
+	reader := bufio.NewReader(file)
+
+	for {
+		line, err := reader.ReadString('\n')
+
+		// skip all line starting without line 'http'
+		//		if equal := strings.Index(line, "http"); equal < 0 {
+		//			fmt.Print(line)
+		//		}
+
+		//alternatively, only print line starting with 'http'
+		if equal := strings.Index(line, "http"); equal >= 0 {
+			fmt.Print(line)
+		}
+
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			fmt.Println(err)
+		}
+
+	}
+
 }

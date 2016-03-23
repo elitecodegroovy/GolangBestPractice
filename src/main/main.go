@@ -13,7 +13,7 @@ import (
 	"strcon"
 	"time"
 	//	"tiny"
-	//	"util"
+	"util"
 	//	"web"
 )
 
@@ -234,6 +234,11 @@ func SyncOp() {
 	//	basic.DetectBalance()
 	basic.StartMuxBalance()
 }
+
+func StartUtil() {
+	util.ReadFile("../util/art.txt")
+	util.StartFormatInt()
+}
 func main() {
 	start := time.Now() // get current time
 
@@ -260,7 +265,7 @@ func main() {
 	//	util.StartCac()
 	StartPolymorphism()
 	StartBasic()
-
+	StartUtil()
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
