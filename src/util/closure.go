@@ -16,7 +16,10 @@ func OuterFunc(strToInt func(s string) int, b int) string {
 func StartFormatInt() {
 	strToInt := func(s string) int {
 		//Atoi is shorthand for ParseInt(s, 10, 0).
-		num, _ := strconv.Atoi(s)
+		num, err := strconv.Atoi(s)
+		if err != nil {
+			fmt.Println("error :", s, ", info :", err)
+		}
 		return num
 	}
 	a = "12"
