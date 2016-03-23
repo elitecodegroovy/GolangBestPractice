@@ -20,5 +20,5 @@ func StartFormatInt() {
 		return num
 	}
 	a = "12"
-	fmt.Println("output:", OuterFunc(strToInt, 2) == "14")
+	fmt.Println("output 14 is ", OuterFunc(strToInt, 2) == "14")
 }
