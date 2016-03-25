@@ -76,3 +76,21 @@ func ReadFile(filePath string) {
 	}
 
 }
+
+func Substring(s string, limit int) string {
+	reader := strings.NewReader(s)
+
+	//create buffer with specified limit of characters
+	buff := make([]byte, limit)
+
+	n, err := io.ReadAtLeast(reader, buff, limit)
+	if err != nil {
+		fmt.Println("error in ReadAtLeast", err)
+	}
+	if n != 0 {
+		return string(buff)
+	} else {
+		//nothing happens, return original string
+		return s
+	}
+}

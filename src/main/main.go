@@ -236,7 +236,7 @@ func SyncOp() {
 }
 
 func StartUtil() {
-	util.ReadFile("../util/art.txt")
+	//	util.ReadFile("../util/art.txt")
 	util.StartFormatInt()
 }
 func main() {
@@ -266,6 +266,9 @@ func main() {
 	StartPolymorphism()
 	StartBasic()
 	StartUtil()
+
+	//first class functions
+	StartFCF()
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
