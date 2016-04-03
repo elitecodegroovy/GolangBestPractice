@@ -230,15 +230,52 @@ func StartBasic() {
 	//	SyncOp()
 }
 
-func SyncOp() {
-	//	basic.DetectBalance()
-	basic.StartMuxBalance()
-}
+//func SyncOp() {
+//	//	basic.DetectBalance()
+//	basic.StartMuxBalance()
+//}
 
 func StartUtil() {
 	//	util.ReadFile("../util/art.txt")
 	util.StartFormatInt()
 }
+
+//Map iterating and comparing operations.
+func DoMapOpts() {
+	stockPrice := map[string]float32{
+		"Apple":     723.11,
+		"IBM":       200.01,
+		"Microsoft": 500.11,
+		"Lenoven":   199.11,
+		"QH360":     180.01,
+	}
+	for k, v := range stockPrice {
+		fmt.Printf("K: %v, V: %v\t", k, v)
+	}
+	// new map whose value is larger than 200
+	highPrice := map[string]float32{}
+	for name, price := range stockPrice {
+		if price > 200.00 {
+			highPrice[name] = price
+		}
+	}
+
+	for hk, hv := range highPrice {
+		fmt.Println("hk: ", hk, ", hv:", hv)
+	}
+
+	//stock name list
+	stockNames := []string{"IBM", "QH360"}
+	for k, v := range stockPrice {
+		for _, sName := range stockNames {
+			if k == sName {
+				fmt.Print(" matching k:", k, ", v:", v)
+			}
+		}
+	}
+
+}
+
 func main() {
 	start := time.Now() // get current time
 
@@ -263,6 +300,7 @@ func main() {
 
 	//	util.StartDemo()
 	//	util.StartCac()
+	DoMapOpts()
 	StartPolymorphism()
 	StartBasic()
 	StartUtil()
