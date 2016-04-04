@@ -225,6 +225,7 @@ func StartConcurrecy() {
 	//block logic
 	conc.StartBlockingMode()
 	//	spider.StartSpider()
+	conc.StartCC()
 }
 
 func StartBasic() {
@@ -315,7 +316,8 @@ func main() {
 	//TODO...
 	//	StartFCF()
 
-	StartSimpleServer()
+	//tcp communication
+	//StartSimpleServer()
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
