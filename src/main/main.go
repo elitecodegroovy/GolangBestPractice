@@ -306,7 +306,7 @@ func main() {
 
 	//	util.StartDemo()
 	//	util.StartCac()
-		DoMapOpts()
+	//	DoMapOpts()
 	//	StartPolymorphism()
 	//	StartBasic()
 	//	StartUtil()
@@ -315,6 +315,7 @@ func main() {
 	//TODO...
 	//	StartFCF()
 
+	StartSimpleServer()
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
