@@ -9,7 +9,8 @@ import (
 )
 
 var connectionCount int
-var messagePool chan (string)
+
+//var messagePool chan (string)
 
 const (
 	INPUT_BUFFER_LENGTH = 140
@@ -73,10 +74,8 @@ func evalMessageRecipient(msg []byte, uName string) bool {
 func (cM *ConnectionManager) Listen(listener net.Listener) {
 	fmt.Println(cM.name, "Started")
 	for {
-
 		conn, err := listener.Accept()
 		if err != nil {
-
 		}
 		connectionCount++
 		fmt.Println(conn.RemoteAddr(), "connected")
@@ -92,9 +91,7 @@ func (cM *ConnectionManager) Listen(listener net.Listener) {
 
 func (cM *ConnectionManager) messageReady(conn net.Conn, user *User) {
 	uChan := make(chan []byte)
-
 	for {
-
 		buf := make([]byte, INPUT_BUFFER_LENGTH)
 		n, err := conn.Read(buf)
 		if err != nil {
@@ -114,16 +111,12 @@ func (cM *ConnectionManager) messageReady(conn net.Conn, user *User) {
 
 			minusYouCount := strconv.FormatInt(int64(connectionCount-1), 10)
 			conn.Write([]byte("Welcome to the chat, " + user.Name + ", there are " + minusYouCount + " other users"))
-
 		} else {
-
 			sendMessage := []byte(user.Name + ": " + strings.TrimRight(string(buf), " \t\r\n"))
-
 			for _, u := range Users {
 				if evalMessageRecipient(sendMessage, u.Name) == true {
 					u.UChannel <- sendMessage
 				}
-
 			}
 
 		}

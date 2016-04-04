@@ -1,4 +1,4 @@
-package main
+package conc
 
 import (
 	"bufio"
@@ -54,7 +54,7 @@ func talk(conn net.Conn, mS chan Message) {
 func doNothing(bf *bufio.Reader) {
 
 }
-func main() {
+func StartSimpleClient() {
 
 	messageServer := make(chan Message)
 
