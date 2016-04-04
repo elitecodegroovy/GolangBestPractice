@@ -71,7 +71,7 @@ func play(strategy0, strategy1 strategy) int {
 	strategies := []strategy{strategy0, strategy1}
 	var s score
 	var turnIsOver bool
-	currentPlayer := rand.Intn(2) // Randomly decide who plays first
+	currentPlayer := rand.Intn(2) //0
 	for s.player+s.thisTurn < win {
 		action := strategies[currentPlayer](s)
 		s, turnIsOver = action(s)
@@ -140,3 +140,6 @@ func StartFCF() {
 			k+1, ratioString(wins[k], games-wins[k]))
 	}
 }
+
+//print native Go data types, including structs, slices, strings, maps,
+// interfaces, and channels.

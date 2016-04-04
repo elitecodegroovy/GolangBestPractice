@@ -215,12 +215,15 @@ func DoCollection() {
 func StartConcurrecy() {
 	//	conc.StartSimple()
 	//	conc.StartSyncSimple()
-	conc.StartReadText()
-	conc.StartChan()
+	//	conc.StartReadText()
+	//	conc.StartChan()
 	//	conc.StartClosure()
 
 	//start channel
 	channel.StartChannel()
+	//	conc.StartPC()
+	//block logic
+	conc.StartBlockingMode()
 	//	spider.StartSpider()
 }
 
@@ -273,6 +276,9 @@ func DoMapOpts() {
 			}
 		}
 	}
+	if stockPrice["ibm"] == 0 {
+		fmt.Println("-----------------------------no ibm")
+	}
 
 }
 
@@ -300,13 +306,15 @@ func main() {
 
 	//	util.StartDemo()
 	//	util.StartCac()
-	DoMapOpts()
-	StartPolymorphism()
-	StartBasic()
-	StartUtil()
+		DoMapOpts()
+	//	StartPolymorphism()
+	//	StartBasic()
+	//	StartUtil()
 
 	//first class functions
-	StartFCF()
+	//TODO...
+	//	StartFCF()
+
 	elapsed := time.Since(start)
 	fmt.Printf("time elapsed: %s\n", elapsed)
 }
