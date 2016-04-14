@@ -60,7 +60,7 @@ func (this *baseController) Prepare() {
 		allAl := strings.Split(al, ",")
 		fmt.Println("browser lang: ", allAl)
 		for _, v := range allAl {
-
+			//Compared the first one!
 			if v == "en" {
 				v = "en-US"
 			} else if v == "zh" {
@@ -76,7 +76,7 @@ func (this *baseController) Prepare() {
 
 	}
 
-	// 2. Default language is English.
+	// 2. Default language is Chinese.
 	if len(this.Lang) == 0 {
 		this.Lang = "zh-CN"
 	}
