@@ -15,6 +15,7 @@ import (
 	//	"tiny"
 	"util"
 	//	"web"
+	"strings"
 )
 
 //There are several ways to create and initialize maps
@@ -283,14 +284,22 @@ func DoMapOpts() {
 
 }
 
+func convertStringsToBytes() {
+	stringContent := []string{"通知中心", "perfect!"}
+	byteContent := "\x00" + strings.Join(stringContent, "\x02\x00") // x20 = space and x00 = null
+	fmt.Println([]byte(byteContent))
+	fmt.Println(string([]byte(byteContent)))
+}
+
 func main() {
 	start := time.Now() // get current time
 
+	convertStringsToBytes()
 	//read file
 	//	ReadFile()
 	//	web.StartTLSHttp()
 	//	DoCollection()
-	StartConcurrecy()
+	//StartConcurrecy()
 	//	StartSimpleWeb()
 	//	web.GetEtcdInfo()
 	//web.SendShortEmail("liujigang@mama100.com", "Connect to the server, authenticate, set the sender and recipient.", "testGolangEmail")
