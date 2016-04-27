@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-	"time"
 )
 
 var initialString string
@@ -40,9 +39,6 @@ func capitalizeLetters(gQ chan string, sQ chan string) {
 }
 
 func StartChannel() {
-
-	// get current time
-	start := time.Now()
 	appStatus = true
 
 	getQueue := make(chan string)
@@ -64,8 +60,5 @@ func StartChannel() {
 			fmt.Println(finalString)
 			break
 		}
-
 	}
-	elapsed := time.Since(start)
-	fmt.Printf(" elapsed: %s", elapsed)
 }

@@ -101,6 +101,7 @@ func TestSubString(t *testing.T) {
 
 	str = "上海新政：外来者购房条件由社保2年调为5年"
 	expected = "上海新政"
+	//TODO ...
 	result = Substring(str, 4)
 	fmt.Println("Geting上海新政 is ", result == "上海新政", result)
 }
