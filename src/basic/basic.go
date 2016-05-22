@@ -2,6 +2,10 @@ package basic
 
 import "fmt"
 
+type rectangle struct {
+	width  int
+	height int
+}
 type Person struct {
 	Name    string
 	Address Address
@@ -18,6 +22,10 @@ type Address struct {
 type Citizen struct {
 	Country string
 	Person
+}
+
+func (r *rectangle) area() int {
+	return r.width * r.height
 }
 
 func (c *Citizen) Nationality() {
@@ -38,6 +46,12 @@ type Human interface {
 
 func SpeakTo(h Human) {
 	h.Talk()
+}
+
+func ShowMeObject() {
+	r := rectangle{width: 8, height: 5}
+	fmt.Printf("rectangle %v， area：%d", r, r.area())
+	fmt.Println()
 }
 
 func StartComposeGo() {

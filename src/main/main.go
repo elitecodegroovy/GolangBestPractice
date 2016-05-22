@@ -230,7 +230,8 @@ func StartConcurrecy() {
 }
 
 func StartBasic() {
-	basic.StartComposeGo()
+	basic.ShowMeObject()
+	//basic.StartComposeGo()
 	//	tiny.StartTiny()
 	//	SyncOp()
 }
@@ -294,7 +295,8 @@ func convertStringsToBytes() {
 func main() {
 	start := time.Now() // get current time
 
-	convertStringsToBytes()
+	//convertStringsToBytes()
+	StartBasic()
 	//read file
 	//	ReadFile()
 	//	web.StartTLSHttp()
