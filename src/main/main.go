@@ -231,7 +231,7 @@ func StartConcurrecy() {
 
 func StartBasic() {
 	basic.ShowMeObject()
-	//basic.StartComposeGo()
+	basic.StartComposeGo()
 	//	tiny.StartTiny()
 	//	SyncOp()
 }

@@ -2,6 +2,7 @@ package basic
 
 import "fmt"
 
+//TODO .... refactor the content.
 type rectangle struct {
 	width  int
 	height int
@@ -54,6 +55,17 @@ func ShowMeObject() {
 	fmt.Println()
 }
 
+//There are two critical points to make about subtyping in Go:
+//
+//1 We can use Anonymous fields to adhere to an interface. We can also adhere to many interfaces.
+// By using Anonymous fields along with interfaces we are very close to true subtyping.
+//
+//2 Go does provide proper subtyping capabilities, but only in the using of a type. Interfaces can
+// be used to ensure that a variety of different types can all be accepted as input into a function,
+// or even as a return value from a function, but in reality they retain their distinct types. This is
+// clearly displayed in the main function where we cannot set Name on Citizen directly because Name
+// isn’t actually a property of Citizen, it’s a property of Person and consequently not yet present
+// during the initialization of a Citizen.
 func StartComposeGo() {
 	p := Person{
 		Name: "Steve",
