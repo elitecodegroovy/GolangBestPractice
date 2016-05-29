@@ -40,13 +40,16 @@ func DefineSlice() {
 	//Specifying Length and Capacity in a Slice with the make Function
 	//If the slice capacity is not specified, the capacity is the same as the length.
 	p := make([]int, 3, 5)
+	p[0] = 1
 	p[1] = 10
 	p[2] = 20
 	fmt.Println(p)
 
+	//string array with init value
 	p1 := []string{"a", "b", "c", "d", "e"}
 	fmt.Println(p1)
 
+	//specify the index seq
 	p2 := []string{"a", "b", 4: "eeee"}
 	fmt.Println(p2)
 
@@ -61,8 +64,9 @@ func DefineSlice() {
 
 	//iterator over Slice type
 	for k, v := range p5 {
-		fmt.Println("index ", k, " value:", v)
+		fmt.Println("index ", k, " value:\t", v)
 	}
+
 }
 
 func DefineArray() {
@@ -187,7 +191,7 @@ func StartupServer() {
 //	http.ListenAndServe(":8080", util.SetUserRoutes())
 //}
 
-func DoCollection() {
+func DoArray() {
 	input, expected := "Hello, World", "dlroW ,olleH"
 	fmt.Printf("%s was reversed %s\n", input, expected)
 
@@ -207,9 +211,14 @@ func DoCollection() {
 	fmt.Println(x4)
 	x5 := [3]string{"Beego", 1: ",", 2: "Gin"}
 	fmt.Println(x5)
+}
 
+func DoCollection() {
+	//array
+	DoArray()
 	//Slice
 	DefineSlice()
+	//map
 	DefineMap()
 }
 
@@ -297,6 +306,7 @@ func main() {
 
 	//convertStringsToBytes()
 	StartBasic()
+	//DoCollection()
 	//read file
 	//	ReadFile()
 	//	web.StartTLSHttp()
