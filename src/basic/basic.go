@@ -1,6 +1,13 @@
 package basic
 
-import "fmt"
+import (
+	"bytes"
+	"flag"
+	"fmt"
+	"io"
+	"os"
+	"time"
+)
 
 //TODO .... refactor the content.
 type rectangle struct {
@@ -90,4 +97,73 @@ func StartComposeGo() {
 	//Subtype with interface method.
 	SpeakTo(&p)
 	SpeakTo(&c)
+}
+
+func ThinkingInInterface() {
+	var w io.Writer
+	w = os.Stdout
+	n, err := w.Write([]byte("hello"))
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Println(",len: ", n) // OK: io.Writer has Write method
+	defineInte()
+
+	//Parsing Flags with flag.Value
+	doParseFlag()
+}
+
+//interface satisfaction
+//This may seem useless, but in fac t the typ e interface{}, which is
+//called the empty interface type, is indispensable.
+func defineInte() {
+	var any interface{}
+	any = true
+	fmt.Print(any, "\t")
+	fmt.Printf("%T\n", any) // "<nil>"
+	any = 12.34
+	fmt.Print(any, "\t")
+	any = "hello"
+	fmt.Print(any, "\t")
+	any = map[string]int{"one": 1}
+	fmt.Print(any, "\t")
+	any = new(bytes.Buffer)
+	fmt.Print(any, "\t")
+
+	// *bytes.Buffer must satisfy io.Writer
+	var w io.Writer = new(bytes.Buffer)
+	fmt.Print(w, "\t")
+}
+
+//Parsing Flags with flag.Value
+var period = flag.Duration("period", 1*time.Second, "sleep period")
+
+func doParseFlag() {
+	flag.Parse()
+	fmt.Printf("Sleeping for %v...", *period)
+	time.Sleep(*period)
+	fmt.Println()
+}
+
+const debug = true
+
+func doInterfaceValue() {
+	//var buf *bytes.Buffer
+	var buf io.Writer
+	if debug {
+		buf = new(bytes.Buffer) // enable collection of output
+	}
+	f(buf) // NOTE: subtly incorrect if define the variable 'buf *bytes.Buffer'
+	if debug {
+		// ...use buf...
+	}
+}
+
+// If out is nonnil,
+//output will be written to it.
+func f(out io.Writer) {
+	// ...do something...
+	if out != nil {
+		out.Write([]byte("done!\n"))
+	}
 }

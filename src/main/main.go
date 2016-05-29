@@ -1,5 +1,27 @@
 package main
 
+/*
+	Package main provides documentation for Go's predeclared identifiers.
+	The items documented here are not actually in package main
+	but their descriptions here allow godoc to present documentation
+	for the language's special identifiers.
+	break default func interface select
+		case defer go map struct
+		chan else goto package switch
+		const fallthrough if range type
+		continue for import return var
+	In addition, there are about three dozen predeclared names like int and true for bui lt-in constants,
+	typ es, and functions:
+	Constants: true false iota nil
+	Types: int int8 int16 int32 int64
+	uint uint8 uint16 uint32 uint64 uintptr
+	float32 float64 complex128 complex64
+	bool byte rune string error
+	Functions: make len cap new append copy close delete
+	complex real imag
+	panic recover
+*/
+
 import (
 	"algo"
 	"channel"
@@ -15,6 +37,7 @@ import (
 	//	"tiny"
 	"util"
 	//	"web"
+	"netutil"
 	"strings"
 )
 
@@ -239,8 +262,9 @@ func StartConcurrecy() {
 }
 
 func StartBasic() {
-	basic.ShowMeObject()
-	basic.StartComposeGo()
+	//basic.ShowMeObject()
+	//basic.StartComposeGo()
+	basic.ThinkingInInterface()
 	//	tiny.StartTiny()
 	//	SyncOp()
 }
@@ -301,10 +325,27 @@ func convertStringsToBytes() {
 	fmt.Println(string([]byte(byteContent)))
 }
 
+func DoNetutil() {
+	ch := make(chan string)
+	url1 := "http://www.iciba.com/sequential"
+	url2 := "https://www.baidu.com"
+	url3 := "https://www.nada.kth.se/~snilsson/go_for_java_programmers/"
+	//nBytes
+	go netutil.FetchUrl(url1, ch)
+	go netutil.FetchUrl(url2, ch)
+	go netutil.FetchUrl(url3, ch)
+	for range [3]int{1, 2, 3} {
+		fmt.Println(<-ch)
+	}
+	fmt.Println("DoNetutil-----------------------------------------------------")
+}
+
 func main() {
 	start := time.Now() // get current time
 
 	//convertStringsToBytes()
+	//StartBasic()
+	//DoNetutil()
 	StartBasic()
 	//DoCollection()
 	//read file
@@ -339,6 +380,6 @@ func main() {
 
 	//tcp communication
 	//StartSimpleServer()
-	elapsed := time.Since(start)
-	fmt.Printf("time elapsed: %s\n", elapsed)
+	elapsed := time.Since(start).Seconds()
+	fmt.Printf("time elapsed: %fs \n ", elapsed)
 }
