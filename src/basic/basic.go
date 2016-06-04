@@ -5,8 +5,10 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"sort"
+	"syscall"
 	"text/tabwriter"
 	"time"
 )
@@ -116,6 +118,12 @@ func ThinkingInInterface() {
 
 	//sort.interface
 	DoSort()
+
+	//error inteface
+	DoError()
+
+	//type assertion
+	DoTypeAssertion()
 }
 
 //interface satisfaction
@@ -280,3 +288,87 @@ type customSort struct {
 func (x customSort) Len() int           { return len(x.t) }
 func (x customSort) Less(i, j int) bool { return x.less(x.t[i], x.t[j]) }
 func (x customSort) Swap(i, j int)      { x.t[i], x.t[j] = x.t[j], x.t[i] }
+
+//error interface
+func DoError() {
+	var err error = syscall.Errno(2)
+	fmt.Println(err.Error()) // "no such file or directory"
+	fmt.Println(err)         // "no such file or directory"
+
+}
+
+//A type assertion is an operation applied to an interface value
+//A type assertion checks that the dynamic type of its operand matches the asserted type.
+func DoTypeAssertion() {
+	var w io.Writer
+	w = os.Stdout
+	f := w.(*os.File) // success: f == os.Stdout
+	fmt.Println("type assertion:", f)
+	//c := w.(*bytes.Buffer) // panic: interface holds *os.File, not *bytes.Buffer
+	//fmt.Println("panic type assertion:", c)
+
+	//error and type assertion
+	_, err := os.Open("/no/such/file")
+	fmt.Println(err) // "open /no/such/file: No such file or directory"
+	fmt.Printf("%#v\n", err)
+
+	DoChannel()
+}
+
+func mustCopy(dst io.Writer, src io.Reader) {
+	if _, err := io.Copy(dst, src); err != nil {
+		log.Fatal(err)
+	}
+}
+
+//channel
+/**
+conn, err := net.Dial("tcp", "127.0.0.1:8000")
+if err != nil {
+	log.Fatal(err)
+}
+done := make(chan struct{})
+go func() {
+	io.Copy(os.Stdout, conn) // NOTE: ignoring errors
+	log.Println("done")
+	done <- struct{}{}
+	// signal the main goroutine
+}()
+mustCopy(conn, os.Stdin)
+conn.Close()
+<- done  // wait for background goroutine to finish
+*/
+func DoChannel() {
+
+	naturals := make(chan int)
+	squares := make(chan int)
+	// Counter
+	go func() {
+		for x := 0; ; x++ {
+			naturals <- x
+			if x == 100 {
+				break // stop the loop
+			}
+		}
+		close(naturals)
+	}()
+	// Squarer
+	go func() {
+		for {
+			x, ok := <-naturals
+			if !ok {
+				break //channel was closed and drained
+			}
+			squares <- x * x
+		}
+		close(squares)
+	}()
+	// Printer (in main goroutine)
+	for {
+		y := <-squares
+		fmt.Print("\t", y)
+		if y == 10000 {
+			break
+		}
+	}
+}
