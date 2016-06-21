@@ -1,7 +1,7 @@
 
 ##Go test
 
-###Test Functions
+### 1 Test Functions
 Each test file must import the testing package. Test functions have the following sig nature:
 
     func TestName(t *testing.T) {
@@ -103,3 +103,55 @@ tests whose function name matches the pattern:
 
 Of course, once we’ve gotten the selected tests to pass, we should invoke go test with no flags
 to run the entire test suite one last time before we commit the change.
+
+#### 1.1 Randomized Testing
+Table-driven tests are convenient for checking that a function works on inputs carefully
+selected to exercise interesting cases in the log ic. Another approach, randomized testing,
+explores a broader range of inputs by constructing inputs at random.
+
+The example below uses the one approach: the randomPalindrome function generates
+words that are known to be palindromes by construction.
+e.g.
+
+
+    func TestRandomPalindromes(t *testing.T) {
+        // Initialize a pseudorandom number generator.
+        seed := time.Now().UTC().UnixNano()
+        t.Logf("Random seed: %d", seed)
+        rng := rand.New(rand.NewSource(seed))
+        for i := 0; i < 1000; i++ {
+            p := randomPalindrome(rng)
+            if !IsPalindrome(p) {
+                t.Errorf("IsPalindrome(%q) = false", p)
+            }
+        }
+    }
+
+test case
+
+    func TestRandomPalindromes(t *testing.T) {
+        // Initialize a pseudorandom number generator.
+        seed := time.Now().UTC().UnixNano()
+        t.Logf("Random seed: %d", seed)
+        rng := rand.New(rand.NewSource(seed))
+        for i := 0; i < 1000; i++ {
+            p := randomPalindrome(rng)
+            if !IsPalindrome(p) {
+                t.Errorf("IsPalindrome(%q) = false", p)
+            }
+        }
+    }
+
+
+#### 1.2 Testing a Command
+The go test tool is useful for testing library packages, but with a little effort we can use it to
+test commands as well. A package named main ordinarily produces an exec utable program,
+but it can be imported as a library too.
+
+
+### 2 profile
+Go supports many kinds of profiling, each concerned with a different aspect of performance,
+but all of them involve recording a sequence of events of interest, each of which has an accompanying
+stack trace—the stack of function cal ls active at the moment of the event. The
+go test tool has bui lt-in support for several kinds of profiling.
+

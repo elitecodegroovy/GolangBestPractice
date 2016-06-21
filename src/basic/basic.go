@@ -7,13 +7,18 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"math"
+	"math/rand"
 	"os"
 	"path/filepath"
+	"reflect"
 	"sort"
+	"strings"
 	"sync"
 	"syscall"
 	"text/tabwriter"
 	"time"
+	"unicode"
 )
 
 //TODO .... refactor the content.
@@ -486,10 +491,131 @@ func dirents(dir string) []os.FileInfo {
 // IsPalindrome reports whether s reads the same forward and backward.
 // (Our first attempt.)
 func IsPalindrome(s string) bool {
-	for i := range s {
-		if s[i] != s[len(s)-1-i] {
+	var letters []rune
+	for _, r := range s {
+		if unicode.IsLetter(r) {
+			letters = append(letters, unicode.ToLower(r))
+		}
+	}
+	for i := range letters {
+		if letters[i] != letters[len(letters)-1-i] {
 			return false
 		}
 	}
 	return true
+}
+
+// randomPalindrome returns a palindrome whose length and contents
+// are derived from the pseudorandom  number generator rng.
+func RandomPalindrome(rng *rand.Rand) string {
+	n := rng.Intn(25) // random length up to 24
+	runes := make([]rune, n)
+	for i := 0; i < (n+1)/2; i++ {
+		r := rune(rng.Intn(0x1000)) // random rune up to '\u0999'
+		runes[i] = r
+		runes[n-1-i] = r
+	}
+	return string(runes)
+}
+
+var out io.Writer = os.Stdout // modified during testing
+
+func echo(newline bool, sep string, args []string) error {
+	fmt.Fprint(out, strings.Join(args, sep))
+	if newline {
+		fmt.Fprintln(out)
+	}
+	return nil
+}
+
+//!+env
+
+type Env map[Var]float64
+
+//!-env
+
+//!+Eval1
+
+func (v Var) Eval(env Env) float64 {
+	return env[v]
+}
+
+func (l literal) Eval(_ Env) float64 {
+	return float64(l)
+}
+
+//!-Eval1
+
+//!+Eval2
+
+func (u unary) Eval(env Env) float64 {
+	switch u.op {
+	case '+':
+		return +u.x.Eval(env)
+	case '-':
+		return -u.x.Eval(env)
+	}
+	panic(fmt.Sprintf("unsupported unary operator: %q", u.op))
+}
+
+func (b binary) Eval(env Env) float64 {
+	switch b.op {
+	case '+':
+		return b.x.Eval(env) + b.y.Eval(env)
+	case '-':
+		return b.x.Eval(env) - b.y.Eval(env)
+	case '*':
+		return b.x.Eval(env) * b.y.Eval(env)
+	case '/':
+		return b.x.Eval(env) / b.y.Eval(env)
+	}
+	panic(fmt.Sprintf("unsupported binary operator: %q", b.op))
+}
+
+func (c call) Eval(env Env) float64 {
+	switch c.fn {
+	case "pow":
+		return math.Pow(c.args[0].Eval(env), c.args[1].Eval(env))
+	case "sin":
+		return math.Sin(c.args[0].Eval(env))
+	case "sqrt":
+		return math.Sqrt(c.args[0].Eval(env))
+	}
+	panic(fmt.Sprintf("unsupported function call: %s", c.fn))
+}
+
+func Display(path string, v reflect.Value) {
+	switch v.Kind() {
+	case reflect.Invalid:
+		fmt.Printf("%s = invalid\n", path)
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < v.Len(); i++ {
+			Display(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
+		}
+	case reflect.Struct:
+		for i := 0; i < v.NumField(); i++ {
+			fieldPath := fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name)
+			Display(fieldPath, v.Field(i))
+		}
+	case reflect.Map:
+		for _, key := range v.MapKeys() {
+			Display(fmt.Sprintf("%s[%s]", path,
+				FormatAtom(key)), v.MapIndex(key))
+		}
+	case reflect.Ptr:
+		if v.IsNil() {
+			fmt.Printf("%s = nil\n", path)
+		} else {
+			Display(fmt.Sprintf("(*%s)", path), v.Elem())
+		}
+	case reflect.Interface:
+		if v.IsNil() {
+			fmt.Printf("%s = nil\n", path)
+		} else {
+			fmt.Printf("%s.type = %s\n", path, v.Elem().Type())
+			Display(path+".value", v.Elem())
+		}
+	default: // basic types, channels, funcs
+		fmt.Printf("%s = %s\n", path, FormatAtom(v))
+	}
 }
