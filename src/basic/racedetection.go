@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-var balance int
 var transactionNo int
 
 func transaction(amt int) bool {

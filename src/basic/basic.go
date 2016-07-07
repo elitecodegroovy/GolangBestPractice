@@ -11,7 +11,6 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
-	"reflect"
 	"sort"
 	"strings"
 	"sync"
@@ -582,40 +581,4 @@ func (c call) Eval(env Env) float64 {
 		return math.Sqrt(c.args[0].Eval(env))
 	}
 	panic(fmt.Sprintf("unsupported function call: %s", c.fn))
-}
-
-func Display(path string, v reflect.Value) {
-	switch v.Kind() {
-	case reflect.Invalid:
-		fmt.Printf("%s = invalid\n", path)
-	case reflect.Slice, reflect.Array:
-		for i := 0; i < v.Len(); i++ {
-			Display(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
-		}
-	case reflect.Struct:
-		for i := 0; i < v.NumField(); i++ {
-			fieldPath := fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name)
-			Display(fieldPath, v.Field(i))
-		}
-	case reflect.Map:
-		for _, key := range v.MapKeys() {
-			Display(fmt.Sprintf("%s[%s]", path,
-				FormatAtom(key)), v.MapIndex(key))
-		}
-	case reflect.Ptr:
-		if v.IsNil() {
-			fmt.Printf("%s = nil\n", path)
-		} else {
-			Display(fmt.Sprintf("(*%s)", path), v.Elem())
-		}
-	case reflect.Interface:
-		if v.IsNil() {
-			fmt.Printf("%s = nil\n", path)
-		} else {
-			fmt.Printf("%s.type = %s\n", path, v.Elem().Type())
-			Display(path+".value", v.Elem())
-		}
-	default: // basic types, channels, funcs
-		fmt.Printf("%s = %s\n", path, FormatAtom(v))
-	}
 }
