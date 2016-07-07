@@ -1,0 +1,134 @@
+1.标题
+标题有两种Setext和Atx两种风格：
+
+SetText风格
+标题1
+===
+标题2
+----
+标题1
+标题2
+Atx风格
+# 标题1
+## 标题2
+#### 标题3
+标题1
+标题2
+标题3
+2.引用
+行首使用 > 加上一个空格表示引用一个段落，可嵌套
+
+> 引用
+> > 我再引用
+引用
+
+我再引用
+3.分隔线
+在一行连续使用三个或以上_或*:
+
+---
+***
+4.代码区域
+代码区域内的文字不会被处理，按照原样输出。
+每一行前边加入4个空格或者一个tab可以标记一个代码段落：
+
+    int main() {
+        reutrn 0;
+    }
+效果:
+
+int main() {
+    return 0;
+}
+还可以使用`内容`来标记行内代码
+
+ `line 1
+  line2`
+line 1
+ line 2
+
+5.强调
+*斜体*
+**粗体**
+_斜体_
+__粗体__
+斜体
+粗体
+斜体
+粗体
+6.链接
+Markdown有两种链接方式：Inline以及Reference
+
+文字链接
+
+Inline:
+[谷歌](https://www.google.com)
+Reference:
+[谷歌][google_url]
+[google_url]:https://www.google.com
+Inline:
+谷歌
+Reference:
+谷歌
+图像链接
+
+![](http://www.google.rw/images/srpr/logo4w.png)
+![][google_url]
+[google_url]:http://www.google.rw/images/srpr/logo4w.png
+
+
+小技巧1 ：对于某些包含()的网址，可以使用第二种方法来标记
+
+![](http://latex.codecogs.com/gif.latex?\prod(n_{i})+1)
+![][1]
+[1]:http://latex.codecogs.com/gif.latex?\prod(n_{i})+1
+ +1)
+
+小技巧2 ：当然，还有一种比较dirty的做法
+
+<img src="http://latex.codecogs.com/gif.latex?\prod(n_{i_1})+1">
+
+自动链接
+使用尖括号<>包含住一段地址或者邮箱
+<http://www.baidu.com>
+http://www.baidu.com
+7.转义字符
+Markdown中的转义字符为\，可以转义的有：
+
+\\ 反斜杠
+\` 反引号
+\* 星号
+\_ 下划线
+\{\} 大括号
+\[\] 中括号
+\(\) 小括号
+\# 井号
+\+ 加号
+\- 减号
+\. 英文句号
+\! 感叹号
+8.列表
+无序列表
+
+* 无序列表
++ 无序列表
+- 无序列表
+无序列表
+无序列表
+无序列表
+有序列表
+
+1.第一项
+2.第二项
+1.第一项
+2.第二项
+9. Latex
+这个不属于Markdown的范畴了。我是先在如何在Markdown中显示链接中带括号的图看到这种在Markdown中插入latex的方法。照抄6.链接一节的例子:
+
+![][1]
+[1]:http://latex.codecogs.com/gif.latex?\prod(n_{i})+1
+
+
+文／蜗牛（简书作者）
+原文链接：http://www.jianshu.com/p/4Q3aay
+著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。
